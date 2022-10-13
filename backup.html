@@ -1,0 +1,91 @@
+<script>
+    (async () => {
+      const {
+        connect,
+        keyStores,
+        WalletConnection,
+        Contract
+      } = nearApi;
+      const keyStore = new keyStores.BrowserLocalStorageKeyStore();
+      const networkId = "testnet";
+      const config = {
+        keyStore,
+        networkId,
+        nodeUrl: `https://rpc.${networkId}.near.org`,
+        walletUrl: `https://wallet.${networkId}.near.org`,
+        helperUrl: `https://helper.${networkId}.near.org`,
+        explorerUrl: `https://explorer.${networkId}.near.org`
+      };
+      const near = await connect(config);
+      const walletConnection = new WalletConnection(near, 'zen');
+      const contract = new Contract(walletConnection.account(), 'dev-1655773072352-14387214351675', {
+        viewMethods: ['is_infected', 'total_supply', 'recently_infected'],
+        changeMethods: ['cure', 'vaxxx']
+      });
+      const btnLogin = document.querySelector('#wallet');
+      const btnLogout = document.querySelector('#members');
+      const userDis = document.querySelector('#userDisplay');
+      if (walletConnection.isSignedIn()) {
+        const accountId = walletConnection.getAccountId();
+        btnLogout.innerHTML = `LOGOUT`;
+        btnLogin.innerHTML = `${accountId}`;
+        userDis.innerHTML = "CEO - " + `${accountId}`;
+        hide(btnLogin);
+        show(btnLogout);
+      }
+
+      // Update total supply
+      setInterval(async function() {
+        const totalInfected = await contract.total_supply();
+        console.log(totalInfected)
+        $("#virus").html(totalInfected)
+      }, 5000);
+      // Update recently infected list
+      setInterval(async function() {
+        const totalInfected = await contract.recently_infected();
+        console.log(totalInfected)
+        $("#virus").html(totalInfected)
+      }, 5000);
+
+      function signIn() {
+        walletConnection.requestSignIn({
+          contractId: 'dev-1660707404856-64614066001887',
+          viewMethods: ['is_infected'],
+          changeMethods: ['cure', 'vaxxx']
+        });
+      }
+      function signOut() {
+        walletConnection.signOut();
+        btnLogout.innerHTML = `MEMBERS`;
+        btnLogin.innerHTML = `WALLET`;
+        hide(btnLogout);
+        show(btnLogin);
+      }
+      btnLogin.addEventListener('click', signIn);
+      btnLogout.addEventListener('click', signOut);
+      function show(btn) {
+        btn.classList.remove('hidden-class');
+        btn.classList.add('active-class');
+      }
+      function hide(btn) {
+        btn.classList.remove('active-class');
+        btn.classList.add('hidden-class');
+      }
+      const btnCure = document.querySelector('#cure');
+      async function cure() {
+        try {
+          await contract.cure({},
+            Big(10).pow(14).toFixed(0),
+            Big(10).pow(24).toFixed(0))
+        } catch (e) {
+          alert(
+            'Something went wrong! ' +
+            'Maybe you need to sign out and back in? ' +
+            'Check your browser console for more info.'
+          )
+          throw e
+        } finally {}
+      }
+      btnCure.addEventListener('click', cure);
+    })();
+  </script>
