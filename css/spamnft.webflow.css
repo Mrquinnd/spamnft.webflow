@@ -8,6 +8,9 @@
   outline-offset: 2px;
   outline-color: #3b79c3;
 }
+
+
+
 a {
   text-decoration: underline;
   cursor: pointer;
@@ -45,7 +48,7 @@ body {
 
 /* glitch: css */
 #virus{
-
+  
   position: absolute;
   padding: 10px;
   top: 0;
@@ -73,6 +76,10 @@ body {
 
 }
 
+.imgClickAndChange{
+  cursor: pointer;
+  transition: width 2s;
+}
 
 
 @keyframes pulse {
@@ -352,6 +359,20 @@ glitch {
   text-align: center;
 }
 
+#cure {
+
+  position: static;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  width: 180px;
+  height: 50px;
+ 
+ 
+}
+
 .cursor-wrapper {
   position: fixed;
   left: 0%;
@@ -442,6 +463,8 @@ particle {
   z-index: 1000;
 }
 
+
+
 .heading:hover{
   transition: 0.1s;
   text-align: center;
@@ -455,6 +478,117 @@ particle {
   z-index: 1000;
 }
 
+#glitchi {
+
+  font-size: 3rem;
+  
+}
+
+#glitchi{
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitchi{
+  2%,64%{
+    transform: translate(2px,0) skew(0deg);
+  }
+  4%,60%{
+    transform: translate(-2px,0) skew(0deg);
+  }
+  62%{
+    transform: translate(0,0) skew(5deg); 
+  }
+}
+
+#glitchi:before,
+#glitchi:after{
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+
+#glitchi:before{
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop{
+  2%,64%{
+    transform: translate(2px,-2px);
+  }
+  4%,60%{
+    transform: translate(-2px,2px);
+  }
+  62%{
+    transform: translate(13px,-1px) skew(-13deg); 
+  }
+}
+
+#glitchi:after{
+  animation: glitchBotom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBotom{
+  2%,64%{
+    transform: translate(-2px,0);
+  }
+  4%,60%{
+    transform: translate(-2px,0);
+  }
+  62%{
+    transform: translate(-22px,5px) skew(21deg); 
+  }
+}
+
+
+
+
+#glitch-title:hover {
+  transition: 0.2s;
+  text-align: center;
+  font-size: 3.8rem;
+  line-height: 70px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: left;
+  text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+    0.025em 0.04em 0 #fffc00;
+  animation: glitch 725ms infinite;
+  z-index: 5000;
+}
+
+#infectz {
+  z-index: 1000;
+}
+
+h1:hover {
+  transition: 0.1s;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: center;
+  text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+    0.025em 0.04em 0 #fffc00;
+  animation: glitch 725ms infinite;
+  z-index: 1000;
+}
+
+#container1 {
+  transition: 0.1s;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: center;
+  text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+    0.025em 0.04em 0 #fffc00;
+  animation: glitch 725ms infinite;
+  z-index: 1000;
+}
 
 
 .background-video-3 {
@@ -540,7 +674,16 @@ particle {
 }
 
 .div-block-4 {
+  z-index: 1000;
   margin-top: 20px;
+}
+
+#face-div{
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .section {
@@ -1010,6 +1153,11 @@ particle {
 }
 
 @media screen and (max-width: 991px) {
+
+  .heading-4{
+    font-size: 15px;
+  }
+
   .cursor-wrapper {
     position: fixed;
     left: 0%;
@@ -1115,6 +1263,8 @@ particle {
 }
 
 @media screen and (max-width: 767px) {
+ 
+
   .hero-overlay {
     padding: 40px 20px;
   }
@@ -1150,6 +1300,7 @@ particle {
 }
 
 @media screen and (max-width: 479px) {
+
   .centered-container {
     display: block;
     margin-top: 0px;
